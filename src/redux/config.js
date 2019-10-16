@@ -1,8 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import thunk from 'redux-thunk';
 import rootReducer from '../reducer/index';
-import rootSaga from './../sagas';
+import rootSaga from '../saga'
 
 const composeEnhancers =
   process.env.NODE_ENV !== 'production' &&
@@ -16,7 +15,7 @@ const composeEnhancers =
 const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = () => {
-  const middlewares = [thunk, sagaMiddleware];
+  const middlewares = [sagaMiddleware];
   const enhancers = [applyMiddleware(...middlewares)];
   const store = createStore(rootReducer, composeEnhancers(...enhancers));
   sagaMiddleware.run(rootSaga);

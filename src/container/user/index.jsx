@@ -1,14 +1,32 @@
 import React, { Component } from 'react';
 import Pagination from "react-js-pagination";
 import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userAction from '../../action/user';
+import * as configTable from '../../constants/table'
 
 export class index extends Component {
+
+    state = {
+        activePage:configTable.ACTIVE_PAGE,
+        itemsCountPerPage:configTable.ITEMS_COUNT_PERPAGE,
+        totalItemsCount:configTable.TOTAL_ITEM_COUNT,
+        pageRangeDisplayed:configTable.PAGE_RANGE_DISPLAYED
+    }
+
 
     handlePageChange = pageNumber=>{
         console.log(pageNumber)
     }
 
-    
+    componentDidMount(){
+        const {userActionCreators} = this.props;
+
+        let req = {
+            page: this.state.activePage
+        };
+        userActionCreators.fetchListUser({...req});
+    }
     render() {
         return (
             <div className="container-fluid">
@@ -71,10 +89,10 @@ export class index extends Component {
                     </div>
                 </div>
                 <Pagination
-                    activePage={9}
-                    itemsCountPerPage={10}
-                    totalItemsCount={450}
-                    pageRangeDisplayed={5}
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={this.state.itemsCountPerPage}
+                    totalItemsCount={this.state.totalItemsCount}
+                    pageRangeDisplayed={this.state.pageRangeDisplayed}
                     onChange={this.handlePageChange}
                 />
             </div>
@@ -84,12 +102,17 @@ export class index extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
+const mapStateToProps = (state) => {
+    return {
+        users: state.user
+    }
 }
+
+const mapDispatchToProps = dispatch => {
+    return{
+        userActionCreators: bindActionCreators(userAction, dispatch),
+    }
+}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(index);
