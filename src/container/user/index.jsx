@@ -1,170 +1,95 @@
 import React, { Component } from 'react';
+import Pagination from "react-js-pagination";
+import {connect} from 'react-redux';
+
 export class index extends Component {
+
+    handlePageChange = pageNumber=>{
+        console.log(pageNumber)
+    }
+
+    
     render() {
         return (
             <div className="container-fluid">
                 {/* Page Heading */}
-                <h1 className="h3 mb-4 text-gray-800">Buttons</h1>
-                <div className="row">
-                    <div className="col-lg-6">
-                        {/* Circle Buttons */}
-                        <div className="card shadow mb-4">
-                            <div className="card-header py-3">
-                                <h6 className="m-0 font-weight-bold text-primary">Circle Buttons</h6>
-                            </div>
-                            <div className="card-body">
-                                <p>Use Font Awesome Icons (included with this theme package) along with the circle buttons as shown in the examples below!</p>
-                                {/* Circle Buttons (Default) */}
-                                <div className="mb-2">
-                                    <code>.btn-circle</code>
-                                </div>
-                                <a href="#" className="btn btn-primary btn-circle">
-                                    <i className="fab fa-facebook-f" />
-                                </a>
-                                <a href="#" className="btn btn-success btn-circle">
-                                    <i className="fas fa-check" />
-                                </a>
-                                <a href="#" className="btn btn-info btn-circle">
-                                    <i className="fas fa-info-circle" />
-                                </a>
-                                <a href="#" className="btn btn-warning btn-circle">
-                                    <i className="fas fa-exclamation-triangle" />
-                                </a>
-                                <a href="#" className="btn btn-danger btn-circle">
-                                    <i className="fas fa-trash" />
-                                </a>
-                                {/* Circle Buttons (Small) */}
-                                <div className="mt-4 mb-2">
-                                    <code>.btn-circle .btn-sm</code>
-                                </div>
-                                <a href="#" className="btn btn-primary btn-circle btn-sm">
-                                    <i className="fab fa-facebook-f" />
-                                </a>
-                                <a href="#" className="btn btn-success btn-circle btn-sm">
-                                    <i className="fas fa-check" />
-                                </a>
-                                <a href="#" className="btn btn-info btn-circle btn-sm">
-                                    <i className="fas fa-info-circle" />
-                                </a>
-                                <a href="#" className="btn btn-warning btn-circle btn-sm">
-                                    <i className="fas fa-exclamation-triangle" />
-                                </a>
-                                <a href="#" className="btn btn-danger btn-circle btn-sm">
-                                    <i className="fas fa-trash" />
-                                </a>
-                                {/* Circle Buttons (Large) */}
-                                <div className="mt-4 mb-2">
-                                    <code>.btn-circle .btn-lg</code>
-                                </div>
-                                <a href="#" className="btn btn-primary btn-circle btn-lg">
-                                    <i className="fab fa-facebook-f" />
-                                </a>
-                                <a href="#" className="btn btn-success btn-circle btn-lg">
-                                    <i className="fas fa-check" />
-                                </a>
-                                <a href="#" className="btn btn-info btn-circle btn-lg">
-                                    <i className="fas fa-info-circle" />
-                                </a>
-                                <a href="#" className="btn btn-warning btn-circle btn-lg">
-                                    <i className="fas fa-exclamation-triangle" />
-                                </a>
-                                <a href="#" className="btn btn-danger btn-circle btn-lg">
-                                    <i className="fas fa-trash" />
-                                </a>
-                            </div>
-                        </div>
-                        {/* Brand Buttons */}
-                        <div className="card shadow mb-4">
-                            <div className="card-header py-3">
-                                <h6 className="m-0 font-weight-bold text-primary">Brand Buttons</h6>
-                            </div>
-                            <div className="card-body">
-                                <p>Google and Facebook buttons are available featuring each company's respective brand color. They are used on the user login and registration pages.</p>
-                                <p>You can create more custom buttons by adding a new color variable in the <code>_variables.scss</code> file and then using the Bootstrap button variant mixin to create a new style, as demonstrated in the <code>_buttons.scss</code> file.</p>
-                                <a href="#" className="btn btn-google btn-block"><i className="fab fa-google fa-fw" /> .btn-google</a>
-                                <a href="#" className="btn btn-facebook btn-block"><i className="fab fa-facebook-f fa-fw" /> .btn-facebook</a>
-                            </div>
-                        </div>
+                {/* <h1 className="h3 mb-2 text-gray-800">User</h1> */}
+
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
+                        <h6 className="m-0 font-weight-bold text-primary">Danh sách nhân viên</h6>
                     </div>
-                    <div className="col-lg-6">
-                        <div className="card shadow mb-4">
-                            <div className="card-header py-3">
-                                <h6 className="m-0 font-weight-bold text-primary">Split Buttons with Icon</h6>
+                    <div className="card-body">
+                        <div className="table-responsive">
+                            <div id="dataTable_wrapper" className="dataTables_wrapper dt-bootstrap4">
+                                <div className="row">
+                                    <div className="col-sm-12 col-md-6">
+                                        <div className="dataTables_length" id="dataTable_length">
+                                        <label>Show 
+                                            <select name="dataTable_length" aria-controls="dataTable" className="custom-select custom-select-sm form-control form-control-sm">
+                                            <option value={10}>10</option>
+                                            <option value={25}>25</option>
+                                            <option value={50}>50</option>
+                                            <option value={100}>100</option>
+                                            </select> 
+                                        </label>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-12 col-md-6">
+                                        <div id="dataTable_filter" className="dataTables_filter float-right">
+                                            <label>Search:
+                                                <input type="search" className="form-control form-control-sm" aria-controls="dataTable" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-sm-12">
+                                        <table className="table table-bordered dataTable" id="dataTable" width="100%" cellSpacing={0} role="grid" aria-describedby="dataTable_info" style={{ width: '100%' }}>
+                                <thead>
+                                    <tr role="row"><th className="sorting_asc" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Name: activate to sort column descending" aria-sort="ascending" style={{ width: 93 }}>Name</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Position: activate to sort column ascending" style={{ width: 143 }}>Position</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Office: activate to sort column ascending" style={{ width: 66 }}>Office</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Age: activate to sort column ascending" style={{ width: 31 }}>Age</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Start date: activate to sort column ascending" style={{ width: 68 }}>Start date</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Salary: activate to sort column ascending" style={{ width: 67 }}>Salary</th></tr>
+                                </thead>
+                                <tfoot>
+                                    <tr><th rowSpan={1} colSpan={1}>Name</th><th rowSpan={1} colSpan={1}>Position</th><th rowSpan={1} colSpan={1}>Office</th><th rowSpan={1} colSpan={1}>Age</th><th rowSpan={1} colSpan={1}>Start date</th><th rowSpan={1} colSpan={1}>Salary</th></tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr role="row" className="odd">
+                                        <td className="sorting_1">Airi Satou</td>
+                                        <td>Accountant</td>
+                                        <td>Tokyo</td>
+                                        <td>33</td>
+                                        <td>2008/11/28</td>
+                                        <td>$162,700</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             </div>
-                            <div className="card-body">
-                                <p>Works with any button colors, just use the <code>.btn-icon-split</code> class and the markup in the examples below. The examples below also use the <code>.text-white-50</code> helper class on the icons for additional styling, but it is not required.</p>
-                                <a href="#" className="btn btn-primary btn-icon-split">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-flag" />
-                                    </span>
-                                    <span className="text">Split Button Primary</span>
-                                </a>
-                                <div className="my-2" />
-                                <a href="#" className="btn btn-success btn-icon-split">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-check" />
-                                    </span>
-                                    <span className="text">Split Button Success</span>
-                                </a>
-                                <div className="my-2" />
-                                <a href="#" className="btn btn-info btn-icon-split">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-info-circle" />
-                                    </span>
-                                    <span className="text">Split Button Info</span>
-                                </a>
-                                <div className="my-2" />
-                                <a href="#" className="btn btn-warning btn-icon-split">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-exclamation-triangle" />
-                                    </span>
-                                    <span className="text">Split Button Warning</span>
-                                </a>
-                                <div className="my-2" />
-                                <a href="#" className="btn btn-danger btn-icon-split">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-trash" />
-                                    </span>
-                                    <span className="text">Split Button Danger</span>
-                                </a>
-                                <div className="my-2" />
-                                <a href="#" className="btn btn-secondary btn-icon-split">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-arrow-right" />
-                                    </span>
-                                    <span className="text">Split Button Secondary</span>
-                                </a>
-                                <div className="my-2" />
-                                <a href="#" className="btn btn-light btn-icon-split">
-                                    <span className="icon text-gray-600">
-                                        <i className="fas fa-arrow-right" />
-                                    </span>
-                                    <span className="text">Split Button Primary</span>
-                                </a>
-                                <div className="mb-4" />
-                                <p>Also works with small and large button classes!</p>
-                                <a href="#" className="btn btn-primary btn-icon-split btn-sm">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-flag" />
-                                    </span>
-                                    <span className="text">Split Button Small</span>
-                                </a>
-                                <div className="my-2" />
-                                <a href="#" className="btn btn-primary btn-icon-split btn-lg">
-                                    <span className="icon text-white-50">
-                                        <i className="fas fa-flag" />
-                                    </span>
-                                    <span className="text">Split Button Large</span>
-                                </a>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <Pagination
+                    activePage={9}
+                    itemsCountPerPage={10}
+                    totalItemsCount={450}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
+                />
             </div>
+
 
         )
     }
 }
 
+const mapStateToProps = (state) => ({
+    
+})
 
-export default index;
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(index);

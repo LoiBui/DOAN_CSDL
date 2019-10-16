@@ -10996,3 +10996,37 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+ul.pagination{
+  float: right;
+}
+
+ul.pagination>li:first-child>a{
+  border-radius: 0.35rem 0 0px 0.35rem;
+}
+ul.pagination>li:last-child>a{
+  border-radius: 0 0.35rem 0.35rem 0;
+}
+
+ul.pagination>li>a{
+  display: block;
+  padding: 4px 12px;
+  background: white;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #e3e6f0;
+  border-right: 0;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+  min-width: 43px;
+}
+
+
+ul.pagination>li.active>a, ul.pagination>li>a:hover{
+  background: #4e73df;
+  color: white;
+}
+
+ul.pagination>li.active>a{
+  cursor: not-allowed;
+}

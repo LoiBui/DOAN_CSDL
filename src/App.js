@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from './component/layout/Header';
 import Sidebar from './component/layout/Sidebar';
 import Button from './container/user/index';
+import Scroll from './component/layout/Scroll';
+import Footer from './component/layout/Footer';
 
 export class App extends Component {
   render() {
@@ -13,7 +15,9 @@ export class App extends Component {
             <Header/>
             <Button/>
           </div>
+          <Footer/>
         </div>
+        <Scroll/>
       </div>
     )
   }
