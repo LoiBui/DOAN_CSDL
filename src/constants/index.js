@@ -1,4 +1,10 @@
 export const API = 'http://127.0.0.1:8000'
+
+
+//LOADING
+export const SHOW_LOADING = 'SHOW_LOADING'
+export const HIDE_LOADING = 'HIDE_LOADING'
+//USER
 export const GET_LIST_USER = 'GET_LIST_USER'
 export const GET_LIST_USER_SUCCESS = 'GET_LIST_USER_SUCCESS'
 export const GET_LIST_USER_ERROR = 'GET_LIST_USER_ERROR'
