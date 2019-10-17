@@ -16,7 +16,10 @@ import * as userApi from '../api/user';
 
 function *listUserSaga({payload}){
     let res = yield call(userApi.getListUser, payload);
-    console.log(res);
+    const {data} = res;
+    if (data.error_code == 0){
+        yield put(user.fetchListUserSuccess(data.data));
+    }
 }
 
 function *root(){

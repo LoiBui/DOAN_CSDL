@@ -14,21 +14,45 @@ export class index extends Component {
         pageRangeDisplayed:configTable.PAGE_RANGE_DISPLAYED
     }
 
-
-    handlePageChange = pageNumber=>{
-        console.log(pageNumber)
-    }
-
-    componentDidMount(){
+    loadData(page = 0){
         const {userActionCreators} = this.props;
 
         let req = {
-            page: this.state.activePage
+            page: page
         };
         userActionCreators.fetchListUser({...req});
     }
+
+    handlePageChange = pageNumber=>{
+        this.loadData(pageNumber);
+    }
+
+    componentDidMount(){
+        this.loadData();
+    }
+
+    renderItemTable = () => {
+        let {users} = this.props.users;
+        
+        return users.map((item, index)=>{
+            return (
+                <tr role="row" className="odd" key={index}>
+                    <td className="sorting_1">{index+1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.department_name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.target_week} / {item.current_revenue_week}</td>
+                    <td>{item.target_month} / {item.current_revenue_month}</td>
+                    <td>{item.target_year} / {item.current_revenue_year}</td>
+                </tr>
+            );
+        });
+        
+    }
     render() {
+        let {total, current_page} = this.props.users;
         return (
+            
             <div className="container-fluid">
                 {/* Page Heading */}
                 {/* <h1 className="h3 mb-2 text-gray-800">User</h1> */}
@@ -66,20 +90,47 @@ export class index extends Component {
                                     <div className="col-sm-12">
                                         <table className="table table-bordered dataTable" id="dataTable" width="100%" cellSpacing={0} role="grid" aria-describedby="dataTable_info" style={{ width: '100%' }}>
                                 <thead>
-                                    <tr role="row"><th className="sorting_asc" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Name: activate to sort column descending" aria-sort="ascending" style={{ width: 93 }}>Name</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Position: activate to sort column ascending" style={{ width: 143 }}>Position</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Office: activate to sort column ascending" style={{ width: 66 }}>Office</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Age: activate to sort column ascending" style={{ width: 31 }}>Age</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Start date: activate to sort column ascending" style={{ width: 68 }}>Start date</th><th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Salary: activate to sort column ascending" style={{ width: 67 }}>Salary</th></tr>
+                                    <tr role="row">
+                                        <th className="sorting_asc" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Name: activate to sort column descending" aria-sort="ascending" style={{ width: 93 }}>#</th>
+                                        <th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Position: activate to sort column ascending" style={{ width: 143 }}>Tên</th>
+                                        <th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Office: activate to sort column ascending" style={{ width: 66 }}>Bộ Phận</th>
+                                        <th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Age: activate to sort column ascending" style={{ width: 31 }}>Email</th>
+                                        <th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Start date: activate to sort column ascending" style={{ width: 68 }}>
+                                            Tuần
+                                            {/* <sub>Hiện tại / Chỉ tiêu</sub>  */}
+                                        </th>
+                                        <th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Start date: activate to sort column ascending" style={{ width: 68 }}>
+                                            Tháng
+                                            {/* <sub>Hiện tại / Chỉ tiêu</sub>  */}
+                                        </th>
+                                        <th className="sorting" tabIndex={0} aria-controls="dataTable" rowSpan={1} colSpan={1} aria-label="Start date: activate to sort column ascending" style={{ width: 68 }}>
+                                            Năm
+                                            {/* <sub>Hiện tại / Chỉ tiêu</sub>  */}
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr><th rowSpan={1} colSpan={1}>Name</th><th rowSpan={1} colSpan={1}>Position</th><th rowSpan={1} colSpan={1}>Office</th><th rowSpan={1} colSpan={1}>Age</th><th rowSpan={1} colSpan={1}>Start date</th><th rowSpan={1} colSpan={1}>Salary</th></tr>
+                                    <tr>
+                                        <th rowSpan={1} colSpan={1}>#</th>
+                                        <th rowSpan={1} colSpan={1}>Tên</th>
+                                        <th rowSpan={1} colSpan={1}>Bộ Phận</th>
+                                        <th rowSpan={1} colSpan={1}>Email</th>
+                                        <th rowSpan={1} colSpan={1}>
+                                            Tuần
+                                            {/* <sub>Hiện tại / Chỉ tiêu</sub>  */}
+                                        </th>
+                                        <th rowSpan={1} colSpan={1}>
+                                            Tháng
+                                            {/* <sub>Hiện tại / Chỉ tiêu</sub>  */}
+                                        </th>
+                                        <th rowSpan={1} colSpan={1}>
+                                            Năm
+                                            {/* <sub>Hiện tại / Chỉ tiêu</sub>  */}
+                                        </th>
+                                    </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr role="row" className="odd">
-                                        <td className="sorting_1">Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                    </tr>
+                                    {this.renderItemTable()}
                                 </tbody>
                             </table>
                             </div>
@@ -89,9 +140,9 @@ export class index extends Component {
                     </div>
                 </div>
                 <Pagination
-                    activePage={this.state.activePage}
+                    activePage={current_page}
                     itemsCountPerPage={this.state.itemsCountPerPage}
-                    totalItemsCount={this.state.totalItemsCount}
+                    totalItemsCount={total}
                     pageRangeDisplayed={this.state.pageRangeDisplayed}
                     onChange={this.handlePageChange}
                 />

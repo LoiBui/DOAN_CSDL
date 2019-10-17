@@ -3,6 +3,8 @@ import axios from 'axios'
 
 class AxiosService{
     constructor() {
+        axios.defaults.headers.common['Accept'] = "application/json";
+        axios.defaults.headers.common['Content-Type'] = "application/json";
         const instance = axios.create();
         instance.interceptors.response.use(this.handleSuccess, this.handleError);
         this.instance = instance;
@@ -17,9 +19,7 @@ class AxiosService{
       }
     
       get(url) {
-        return this.instance.get(url, {
-          'Content-Type' : 'application/json'
-        });
+        return this.instance.get(url);
       }
     
       post(url, body) {

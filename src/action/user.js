@@ -1,6 +1,6 @@
 import * as type from '../constants';
 
-export const fetchListUser = (param = {})=>{
+export const fetchListUser = (param)=>{
     return {
         type: type.GET_LIST_USER,
         payload:{
@@ -13,7 +13,7 @@ export const fetchListUserSuccess = res => {
     return {
         type: type.GET_LIST_USER_SUCCESS,
         payload:{
-            res,
+            ...res,
         }
     }
 }
