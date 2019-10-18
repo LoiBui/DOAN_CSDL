@@ -1,27 +1,26 @@
 import {
     call,
     delay,
-    fork,
     put,
     select,
-    take,
     takeEvery,
     takeLatest,
 } from 'redux-saga/effects';
-import * as user from '../action/user';
+import * as revenue from '../action/revenue';
 import * as type from '../constants/index';
-import * as userApi from '../api/user';
+import * as revenueApi from '../api/revenue';
 import * as loading from '../action/loading';
+import * as messageQuestion from '../action/notice/question';
 
 
 
-function *listUserSaga({payload}){
-    let res = yield call(userApi.getListUser, payload);
-
+function *listRevenueSaga({payload}){
+    let res = yield call(revenueApi.getListRevenue, payload);
+    
     yield put(loading.showLoading());
     const {data} = res;
     if (data.error_code === 0){
-        yield put(user.fetchListUserSuccess(data.data));
+        yield put(revenue.fetchListRevenueSuccess(data.data));
     }
 
     let timeLoad = true;
@@ -30,8 +29,16 @@ function *listUserSaga({payload}){
     yield put(loading.hideLoading());
 }
 
+function *deleteRevenue({payload}){
+
+    yield put(messageQuestion.showMessageQuestion("Bạn có chắc chắn muốn xóa không ?"))
+    let resultMsg = yield select(state=>state.question);
+    console.log(resultMsg);
+}
+
 function *root(){
-    yield takeLatest(type.GET_LIST_USER, listUserSaga);
+    yield takeLatest(type.GET_LIST_REVENUE, listRevenueSaga);
+    yield takeEvery(type.DELETE_REVENUE, deleteRevenue);
 }
 
 export default root;

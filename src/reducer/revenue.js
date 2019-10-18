@@ -1,17 +1,17 @@
 import * as type from '../constants/index'
 const initialState = {
-    users: [],
+    revenues: [],
     total: '',
     current_page: ''
 };
 
 const reducer = (state=initialState, action)=>{
     switch (action.type) {
-        case type.GET_LIST_USER_SUCCESS:
+        case type.GET_LIST_REVENUE_SUCCESS:
             let {data, total, current_page} = action.payload;
             return {
                 ...state,
-                users: data,
+                revenues: data,
                 total: total,
                 current_page: current_page
             }
