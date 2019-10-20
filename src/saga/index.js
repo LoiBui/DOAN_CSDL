@@ -10,30 +10,53 @@ import * as revenue from '../action/revenue';
 import * as type from '../constants/index';
 import * as revenueApi from '../api/revenue';
 import * as loading from '../action/loading';
-import * as messageQuestion from '../action/notice/question';
+import * as notice from '../action/notice';
 
 
 
 function *listRevenueSaga({payload}){
     let res = yield call(revenueApi.getListRevenue, payload);
     
+
+    //fake loading
     yield put(loading.showLoading());
+
+    let timeLoad = true;
+    setTimeout(()=>{timeLoad = false}, 1000);
+    if (timeLoad) yield delay(1000);
+
     const {data} = res;
     if (data.error_code === 0){
         yield put(revenue.fetchListRevenueSuccess(data.data));
     }
 
-    let timeLoad = true;
-    setTimeout(()=>{timeLoad = false}, 1000);
-    if (timeLoad) yield delay(1000);
+    
+    
     yield put(loading.hideLoading());
 }
 
 function *deleteRevenue({payload}){
+    
+    let res = yield call(revenueApi.deleteRevenueById, payload);
+    let {error_code} = res.data;
+    
+    if(error_code === 0){
+        yield put(revenue.deleteRevenueSuccess(payload));
 
-    yield put(messageQuestion.showMessageQuestion("Bạn có chắc chắn muốn xóa không ?"))
-    let resultMsg = yield select(state=>state.question);
-    console.log(resultMsg);
+        let noticeRes = {
+            type: 'success',
+            msg: 'Xóa doanh thu thành công !!!'
+        }
+
+        yield put(notice.showNotice(noticeRes));
+    }else{
+        let noticeRes = {
+            type: 'error',
+            msg: 'Xóa doanh thu thất bại !!!'
+        }
+
+        yield put(notice.showNotice(noticeRes));
+    }
 }
 
 function *root(){

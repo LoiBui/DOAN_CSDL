@@ -7,7 +7,8 @@ import Scroll from './component/layout/Scroll';
 import Footer from './component/layout/Footer';
 import configureStore from './redux/config';
 import Loading from './component/loading';
-import Question from './component/notice/question';
+import Notice from './component/notice/notice';
+
 
 const store = configureStore();
 export class App extends Component {
@@ -17,7 +18,7 @@ export class App extends Component {
         <div id="wrapper">
           <Loading/>
           <Sidebar/>
-          <Question/>
+          <Notice/>
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
               <Header/>

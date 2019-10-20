@@ -5,6 +5,7 @@ class AxiosService{
     constructor() {
         axios.defaults.headers.common['Accept'] = "application/json";
         axios.defaults.headers.common['Content-Type'] = "application/json";
+        axios.defaults.headers.common['Authorization'] = "JMRvbq7lNramTXGzCj1ioPut5EB6fdK0";
         const instance = axios.create();
         instance.interceptors.response.use(this.handleSuccess, this.handleError);
         this.instance = instance;

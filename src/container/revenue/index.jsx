@@ -6,6 +6,7 @@ import * as revenueAction from '../../action/revenue';
 import * as configTable from '../../constants/table';
 import Viewer from 'react-viewer';
 import 'react-viewer/dist/index.css';
+import Question from '../../component/notice/question';
 
 
 export class index extends Component {
@@ -15,6 +16,11 @@ export class index extends Component {
             visible: false,
             src: [],
             activeIndex: 0
+        },
+        question:{
+            isShow: false,
+            msg: '',
+            id: ''
         },
         activePage: configTable.ACTIVE_PAGE,
         itemsCountPerPage: configTable.ITEMS_COUNT_PERPAGE,
@@ -61,10 +67,39 @@ export class index extends Component {
         });
     }
 
+
+    //delete item
     onDeleteItem = id => {
+        this.setState({
+            question:{
+                isShow: true,
+                msg: "Bạn có chắc chắn muốn xóa không ?",
+                id
+            },
+        });
+    }
+
+    //close cpn question
+    closeQuestion = ()=>{
+        this.setState({
+            question:{
+                isShow: false,
+                msg: '',
+                id:''
+            },
+        });
+    }
+
+    onCancel = () => {
+        this.closeQuestion();
+    }
+
+    onConfirm = ()=>{
+        
+        this.closeQuestion();
         const { revenueActionCreators } = this.props;
         let payload = {
-            id: id
+            id: this.state.question.id
         }
         revenueActionCreators.deleteRevenue(payload);
     }
@@ -156,6 +191,12 @@ export class index extends Component {
                     onClose={() => { this.setState({ viewerImg: false }); }}
                     images={this.state.viewerImg.src}
                     activeIndex={this.state.viewerImg.activeIndex}
+                />
+                <Question 
+                    isShow={this.state.question.isShow} 
+                    message={this.state.question.msg}
+                    onConfirm={this.onConfirm}
+                    onCancel={this.onCancel}
                 />
             </div>
 

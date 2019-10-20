@@ -1,10 +1,9 @@
 export const API = 'http://127.0.0.1:8000'
 
 
-//MESSAGE
-export const SHOW_QUESTION = 'SHOW_QUESTION'
-export const HIDE_QUESTION = 'HIDE_QUESTION'
-
+//NOTICE
+export const SHOW_NOTICE = 'SHOW_NOTICE'
+export const HIDE_NOTICE = 'HIDE_NOTICE'
 
 //LOADING
 export const SHOW_LOADING = 'SHOW_LOADING'

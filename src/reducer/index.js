@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import revenue from './revenue';
 import loading from './loading';
-import question from './notice/question';
+import notice from './notice';
 
 const root = combineReducers({
     revenue,
     loading,
-    question
+    notice
 });
 
 export default root;

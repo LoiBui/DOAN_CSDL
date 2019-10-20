@@ -1,4 +1,6 @@
-import * as type from '../constants/index'
+import * as type from '../constants/index';
+import _ from 'lodash';
+
 const initialState = {
     revenues: [],
     total: '',
@@ -14,6 +16,16 @@ const reducer = (state=initialState, action)=>{
                 revenues: data,
                 total: total,
                 current_page: current_page
+            }
+
+        case type.DELETE_REVENUE_SUCCESS:
+            let {id} = action.payload;
+            return {
+                ...state,
+                revenues: _.filter(state.revenues, item=>{
+                    return item.id !== id;
+                }),
+                total: state.total--
             }
         default:
             return state;
