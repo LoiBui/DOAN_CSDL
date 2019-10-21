@@ -16,7 +16,7 @@ import * as notice from '../action/notice';
 
 function *listRevenueSaga({payload}){
     let res = yield call(revenueApi.getListRevenue, payload);
-    
+    // console.log('errror', res);    
 
     //fake loading
     yield put(loading.showLoading());

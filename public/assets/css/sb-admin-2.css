@@ -11065,3 +11065,40 @@ ul.pagination>li.active>a{
     transform: translate3d(2000px, 0, 0);
   }
 }
+
+
+
+.customeLabelUploadFile{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #d1d3e2;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+label{
+  cursor: pointer;
+}
+
+.customAddImg{
+  border: none !important;
+  font-weight: 900;
+  cursor: auto;
+}
+
+.customLabel{
+  width: 50px;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #858695;
+    line-height: 46px;
+    border-radius: 50%;
+}
+
+.srv-validation-message{
+  color: #ff0000cc;
+}

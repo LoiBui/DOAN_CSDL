@@ -138,8 +138,9 @@ export class index extends Component {
                 {/* <h1 className="h3 mb-2 text-gray-800">User</h1> */}
 
                 <div className="card shadow mb-4">
-                    <div className="card-header py-3">
-                        <h6 className="m-0 font-weight-bold text-primary">Danh sách nhân viên</h6>
+                    <div className="card-header py-3" style={{display: 'flex',justifyContent: 'space-between'}}>
+                        <h6 className="m-0 font-weight-bold text-primary">Danh sách Doanh Số</h6>
+                        <button className="btn btn-success">Thêm Ngay</button>
                     </div>
                     <div className="card-body">
                         <div className="table-responsive">

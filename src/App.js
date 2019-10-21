@@ -8,6 +8,15 @@ import Footer from './component/layout/Footer';
 import configureStore from './redux/config';
 import Loading from './component/loading';
 import Notice from './component/notice/notice';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch
+} from "react-router-dom";
+import Dashboard from './container/dashboard';
+import AddRevenue from './container/revenue/add';
 
 
 const store = configureStore();
@@ -15,19 +24,34 @@ export class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div id="wrapper">
-          <Loading/>
-          <Sidebar/>
-          <Notice/>
-          <div id="content-wrapper" className="d-flex flex-column">
-            <div id="content">
-              <Header/>
-              <Button/>
+        <Router>
+          <div id="wrapper">
+            <Loading/>
+            <Sidebar/>
+            <Notice/>
+            <div id="content-wrapper" className="d-flex flex-column">
+              <div id="content">
+                <Header/>
+                <Switch>
+                  <Route exact path="/doanhso">
+                    <Button />
+                  </Route>
+                  <Route exact path="/doanhso/them">
+                    <AddRevenue isShow={true}/>
+                  </Route>
+                  <Route exact path="/dashboard">
+                    <Dashboard />
+                  </Route>
+                </Switch>
+              </div>
+              <Footer/>
             </div>
-            <Footer/>
+            <Scroll/>
           </div>
-          <Scroll/>
-        </div>
+
+          
+
+        </Router>
       </Provider>
     )
   }

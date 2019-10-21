@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import {CustomLinkSignle, CustomLinkMultiLevel} from '../../commons/CustomLink';
+
 
 export class Sidebar extends Component {
     
@@ -12,11 +20,9 @@ export class Sidebar extends Component {
                     <div className="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
                 </a>
                 <hr className="sidebar-divider my-0" />
-                <li className="nav-item active">
-                    <a className="nav-link" href="index.html">
-                        <i className="fas fa-fw fa-tachometer-alt" />
-                        <span>Dashboard</span></a>
-                </li>
+                <CustomLinkSignle label="Dashboard" to="/dashboard" exact={true}/>
+                
+                
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Interface
@@ -34,21 +40,9 @@ export class Sidebar extends Component {
                         </div>
                     </div>
                 </li>
-                <li className="nav-item">
-                    <a className="nav-link collapsed" href="https://www.facebook.com/" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                        <i className="fas fa-fw fa-wrench" />
-                        <span>Utilities</span>
-                    </a>
-                    <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                        <div className="bg-white py-2 collapse-inner rounded">
-                            <h6 className="collapse-header">Custom Utilities:</h6>
-                            <a className="collapse-item" href="utilities-color.html">Colors</a>
-                            <a className="collapse-item" href="utilities-border.html">Borders</a>
-                            <a className="collapse-item" href="utilities-animation.html">Animations</a>
-                            <a className="collapse-item" href="utilities-other.html">Other</a>
-                        </div>
-                    </div>
-                </li>
+                
+                <CustomLinkMultiLevel to="/doanhso" labelParent = "Doanh Số"/>
+                
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Addons
