@@ -49,6 +49,11 @@ export class add extends Component {
           this.forceUpdate();
         }
     }
+
+    onUpload = (event)=>{
+        // console.log(window.URL.createObjectURL(event.file[0]));
+        console.log(event)
+    }
     renderMain = () => {
         if (this.state.isShow)
             return (
@@ -103,7 +108,8 @@ export class add extends Component {
                             <label>+</label>
                         </div>
                     </label>
-                    <input style={{display: 'none'}} type="file" name="photo" id={`photo${i}`}/>
+                    <input onChange={this.onUpload} accept="image/gif, image/jpeg, image/png" style={{display: 'none'}} type="file" name="photo" id={`photo${i}`}/>
+                    <img src="" alt=""/>
                 </div>
             );
             
